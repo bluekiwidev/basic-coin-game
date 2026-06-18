@@ -28,9 +28,13 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function(player2, nemeny)
     game.gameOver(false)
 })
 
-tiles.setCurrentTilemap(tilemap`level1`)
-tiles.setCurrentTilemap(tilemap`level4`)
+tiles.setCurrentTilemap(tilemap`5`)
+tiles.setCurrentTilemap(tilemap`3`)
 tiles.setCurrentTilemap(tilemap`leveltest`)
+
+function rotateLevel(){
+    tiles.setCurrentTilemap(tilemap(randint(1, 5)))
+}
 
 let coins = 0
 let coin: Sprite = null
@@ -40,6 +44,7 @@ namespace SpriteKind {
 }
     
 function spawnCoin() {
+    randint(0, 10)
     let coin = sprites.create(img`
             . . 4 4 . .
             . 4 f f 4 .
@@ -58,7 +63,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function(player2, coin){
     coin.destroy()
     coins +=1
     if (coins >= 10){
-        game.over(true)
+        rotateLevel()
     }
     spawnCoin()
 })
