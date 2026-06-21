@@ -20,10 +20,6 @@ function rotateLevel () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function (player2, coin) {
     coin.destroy()
     coins += 1
-    if (coins >= 10) {
-        rotateLevel()
-    }
-    spawnCoin()
 })
 let gazornogaz = 0
 let coins = 0
@@ -46,12 +42,17 @@ scene.cameraFollowSprite(player2)
 tiles.setCurrentTilemap(tilemap`5`)
 tiles.setCurrentTilemap(tilemap`3`)
 tiles.setCurrentTilemap(tilemap`2`)
-for (let index = 0; index < 5; index++) {
-    spawnCoin()
-}
+
 forever(function () {
     gazornogaz = randint(1, 69)
     nemeny.follow(player2, gazornogaz)
     console.log(gazornogaz)
     pause(1000)
+})
+forever(function(){
+    for (let index = 0; index < 5; index++) {
+        spawnCoin();
+    }
+
+    rotateLevel()
 })
