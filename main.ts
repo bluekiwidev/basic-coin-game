@@ -5,6 +5,8 @@ let player2 = sprites.create(img`
 . . 5 5 . . 
 `, SpriteKind.Player)
 
+randTilemap()
+
 let nemeny = sprites.create(img`
     . 2 2 2 .
     2 2 2 2 2
@@ -35,10 +37,8 @@ nemeny.setPosition(130, 0)
 scene.cameraFollowSprite(player2)
 
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function(player2, nemeny) {
-    //game.gameOver(false)
+    game.gameOver(false)
 })
-
-tiles.setCurrentTilemap(tilemap`1`)
 
 let coins = 0
 let coin: Sprite = null
@@ -62,22 +62,19 @@ function spawnCoin() {
 function randTilemap() {
     switch (randint(1, 5)) {
         case 1:
-        tiles.setCurrentTilemap(tilemap`1`)
+        tiles.setCurrentTilemap(tilemap`_1`)
 
         case 2:
-        tiles.setCurrentTilemap(tilemap`2`)
+        tiles.setCurrentTilemap(tilemap`_2`)
 
         case 3:
-        tiles.setCurrentTilemap(tilemap`3`)
-
-        case 3:
-        tiles.setCurrentTilemap(tilemap`4`)
+        tiles.setCurrentTilemap(tilemap`_3`)
 
         case 4:
-        tiles.setCurrentTilemap(tilemap`4`)
+        tiles.setCurrentTilemap(tilemap`_4`)
 
         case 5:
-        tiles.setCurrentTilemap(tilemap`5`)
+        tiles.setCurrentTilemap(tilemap`_5`)
 
     }
 }
