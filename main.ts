@@ -39,7 +39,7 @@ scene.cameraFollowSprite(player2)
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function(player2, nemeny) {
     game.gameOver(false)
 })
-
+info.setScore(0)
 let coins = 0
 let coin: Sprite = null
 let levelCoins = 0
@@ -87,4 +87,5 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function(player2, coin){
     coin.destroy()
     coins++
     levelCoins++
+    info.changeScoreBy(1)
 })
