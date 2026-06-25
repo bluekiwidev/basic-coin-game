@@ -21,19 +21,28 @@ forever(function() {
     pause(1000)
 })
 
+forever(function() {
+    if (levelCoins >= 5){
+        levelCoins = 0
+        randTilemap()
+        for (let i = 0; i >= 5; i++) {
+            spawnCoin();
+        }
+    }
+})
+
 nemeny.setPosition(130, 0)
 scene.cameraFollowSprite(player2)
 
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function(player2, nemeny) {
-    game.gameOver(false)
+    //game.gameOver(false)
 })
 
-tiles.setCurrentTilemap(tilemap`level1`)
-tiles.setCurrentTilemap(tilemap`level4`)
-tiles.setCurrentTilemap(tilemap`leveltest`)
+tiles.setCurrentTilemap(tilemap`1`)
 
 let coins = 0
 let coin: Sprite = null
+let levelCoins = 0
 
 namespace SpriteKind {
     export const Coin = SpriteKind.create()
@@ -50,15 +59,35 @@ function spawnCoin() {
     tiles.placeOnRandomTile(coin, sprites.castle.tileGrass2)
 }
 
+function randTilemap() {
+    switch (randint(1, 5)) {
+        case 1:
+        tiles.setCurrentTilemap(tilemap`1`)
+
+        case 2:
+        tiles.setCurrentTilemap(tilemap`2`)
+
+        case 3:
+        tiles.setCurrentTilemap(tilemap`3`)
+
+        case 3:
+        tiles.setCurrentTilemap(tilemap`4`)
+
+        case 4:
+        tiles.setCurrentTilemap(tilemap`4`)
+
+        case 5:
+        tiles.setCurrentTilemap(tilemap`5`)
+
+    }
+}
+
 for (let i = 0; i < 5; i++) {
     spawnCoin()
 }
 
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function(player2, coin){
     coin.destroy()
-    coins +=1
-    if (coins >= 10){
-        game.over(true)
-    }
-    spawnCoin()
+    coins++
+    levelCoins++
 })
