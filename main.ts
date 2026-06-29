@@ -5,7 +5,7 @@ let player2 = sprites.create(img`
 . . 5 5 . . 
 `, SpriteKind.Player)
 
-randTilemap()
+randTilemapbak()
 
 let nemeny = sprites.create(img`
     . 2 2 2 .
@@ -26,7 +26,7 @@ forever(function() {
 forever(function() {
     if (levelCoins >= 5){
         levelCoins = 0
-        randTilemap()
+        randTilemapbak()
         for (let i = 0; i >= 5; i++) {
             spawnCoin();
         }
@@ -59,23 +59,29 @@ function spawnCoin() {
     tiles.placeOnRandomTile(coin, sprites.castle.tileGrass2)
 }
 
-function randTilemap() {
-    switch (randint(1, 5)) {
-        case 1:
+function randTilemapbak() {
+    let seed = randint(1, 5)
+    if (seed == 1) {
         tiles.setCurrentTilemap(tilemap`_1`)
-
-        case 2:
+        spawnlotsofcoins()
+    } else if (seed == 2) {
         tiles.setCurrentTilemap(tilemap`_2`)
-
-        case 3:
+        spawnlotsofcoins()
+    } else if (seed == 3) {
         tiles.setCurrentTilemap(tilemap`_3`)
-
-        case 4:
+        spawnlotsofcoins()
+    } else if (seed == 4) {
         tiles.setCurrentTilemap(tilemap`_4`)
-
-        case 5:
+        spawnlotsofcoins()
+    } else if (seed == 5) {
         tiles.setCurrentTilemap(tilemap`_5`)
+        spawnlotsofcoins()
+    }
+}
 
+function spawnlotsofcoins() {
+    for (let i = 0; i < 5; i++) {
+        spawnCoin()
     }
 }
 
